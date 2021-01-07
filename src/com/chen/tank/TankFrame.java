@@ -38,22 +38,33 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        //System.out.println("paint");
         g.fillRect(x, y ,50, 50);
-        //x += 1;
-        //y += 1;
+        if(bL == true){
+            x-=speed;
+        }else if(bR == true){
+            x+=speed;
+        }else if(bU == true){
+            y-=speed;
+        }else if(bD == true){
+            y+=speed;
+        }
     }
+
+    boolean bL = false;
+    boolean bU = false;
+    boolean bR = false;
+    boolean bD = false;
+    int speed = 10;
 
     /**
      * 键盘监听处理的类
      */
     class MyKeyListener extends KeyAdapter{
 
-        boolean bL = false;
-        boolean bU = false;
-        boolean bR = false;
-        boolean bD = false;
-
+        /**
+         * 按下设为true
+         * @param e
+         */
         @Override
         public void keyPressed(KeyEvent e) {
             int keyCode = e.getKeyCode();
@@ -78,6 +89,10 @@ public class TankFrame extends Frame {
             repaint();
         }
 
+        /**
+         * 松开设置为 false
+         * @param e
+         */
         @Override
         public void keyReleased(KeyEvent e) {
             int keyCode = e.getKeyCode();
