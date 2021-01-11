@@ -20,16 +20,22 @@ public class Tank {
     /**
      * 速度
      */
-    private static final int SPEED = 1;
+    private static final int SPEED = 5;
     /**
      * 是否移动
      */
     private boolean moving = false;
 
-    public Tank(int x, int y, Dir dir) {
+    /**
+     * 持有外部frame对象
+     */
+    private TankFrame tf = null;
+
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public boolean isMoving() {
@@ -65,13 +71,16 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
         g.fillRect(x, y, 50, 50);
+        g.setColor(c);
         move();
     }
 
     private void move() {
-        if(!moving) {
-            return ;
+        if (!moving) {
+            return;
         }
 
         switch (dir) {
@@ -82,13 +91,17 @@ public class Tank {
                 x += SPEED;
                 break;
             case UP:
-                y-=SPEED;
+                y -= SPEED;
                 break;
             case DOWN:
-                y+=SPEED;
+                y += SPEED;
                 break;
             default:
                 break;
         }
+    }
+
+    public void fire() {
+        tf.bullets.add(new Bullet(x, y, dir,tf));
     }
 }
