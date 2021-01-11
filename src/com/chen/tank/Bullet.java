@@ -26,7 +26,8 @@ public class Bullet {
     /**
      * 子弹大小
      */
-    private static int WIDTH = 20, HEIGHT = 20;
+    private static final
+    int WIDTH = 20, HEIGHT = 20;
     /**
      * 是否存活
      */
