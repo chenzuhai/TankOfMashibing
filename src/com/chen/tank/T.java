@@ -12,7 +12,7 @@ public class T {
         TankFrame tf = new TankFrame();
         while (true) {
             try {
-                Thread.sleep(200);
+                Thread.sleep(10);
                 tf.repaint();
             } catch (InterruptedException e) {
                 e.printStackTrace();
