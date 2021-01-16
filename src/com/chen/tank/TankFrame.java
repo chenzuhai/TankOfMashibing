@@ -5,8 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -20,9 +19,16 @@ public class TankFrame extends Frame {
 
     Tank myTank = new Tank(200, 200, Dir.DOWN,this);
 
+    /**
+     * 敌人坦克
+     */
+    List<Tank> enemyTanks = new ArrayList<>();
+    {
+        enemyTanks.add(new Tank(300,300,Dir.DOWN,this));
+    }
+
     List<Bullet> bullets = new ArrayList<>();
 
-    //Bullet b = new Bullet(300,300,Dir.DOWN);
 
     static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
 
@@ -58,6 +64,19 @@ public class TankFrame extends Frame {
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }
+        //方法二,不会出现并发修改异常
+        /**
+        for(Iterator<Bullet> it= bullets.iterator();it.hasNext();){
+            Bullet b = it.next();
+            if(!b.isLive())it.remove();
+        }
+         */
+        //方法三并发修改异常
+        /**
+        for(Bullet b:bullets){
+            b.paint();
+        }
+         */
     }
 
     /**

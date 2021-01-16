@@ -102,6 +102,7 @@ public class Tank {
     }
 
     public void fire() {
-        tf.bullets.add(new Bullet(x, y, dir,tf));
+        //让子弹从坦克中心发出
+        tf.bullets.add(new Bullet(x+15, y+15, dir,tf));
     }
 }
